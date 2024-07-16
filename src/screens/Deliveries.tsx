@@ -8,6 +8,7 @@ import {
 } from "../types/deliveriesType";
 import { toast } from "react-toastify";
 import moment from "moment";
+import img from "../assets/shawnanggg-nmpW_WwwVSc-unsplash.jpg";
 export const Deliveries = () => {
   const [alllDeliveries, setAllDeliveries] = useState<IDelivery[]>([]);
   const [loading, setLoading] = useState(false);
@@ -72,10 +73,7 @@ export const Deliveries = () => {
   return (
     <div className="w-100">
       <div className={styles.restauratImage}>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/R%C3%B6e_g%C3%A5rd_caf%C3%A9_2.jpg/1200px-R%C3%B6e_g%C3%A5rd_caf%C3%A9_2.jpg"
-          alt=""
-        />
+        <img src={img} alt="" />
         <div className={styles.restaurantName}>
           <h3>Restasurant's Management</h3>
         </div>

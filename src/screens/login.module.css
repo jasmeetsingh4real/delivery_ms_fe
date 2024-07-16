@@ -1,0 +1,19 @@
+.staffLogin {
+  height: 100vh;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.loginCont {
+  min-width: 400px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: white;
+}
