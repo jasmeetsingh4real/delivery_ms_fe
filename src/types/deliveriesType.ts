@@ -45,3 +45,45 @@ export enum EnumOrderStatus {
   FAILED = "failed",
   SUCCESSFUL = "successful",
 }
+
+export enum EnumStaffRoles {
+  DELIVERY = "delivery",
+  ADMIN = "admin",
+  EMPLOYEE = "employee",
+  CHEF = "chef",
+}
+
+export interface IStaff {
+  id: number;
+  staffName: string;
+  restaurantId: string;
+  role: EnumStaffRoles;
+  age: number;
+  phoneNo: string;
+  email: string;
+  isActive: boolean;
+  salary: number;
+}
+
+export interface IApiResponse<T> {
+  data: {
+    success: boolean;
+    errorMessage?: any;
+    result?: T;
+  };
+}
+
+export interface IRestaurant {
+  id: string;
+  restaurantName: string;
+  ownerId: string;
+  openingTime: Date;
+  closingTime: Date;
+  restaurantEmail: string;
+  restaurantContact: string;
+  stateId: number;
+  countryId: number;
+  cityId: number;
+  streetAddress: string;
+  status: string;
+}

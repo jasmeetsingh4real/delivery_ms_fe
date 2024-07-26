@@ -11,6 +11,19 @@
   height: auto;
   width: 100%;
 }
+.staffName {
+  position: absolute;
+  right: 30px;
+  color: rgba(39, 39, 39, 0.767);
+  background-color: rgb(255, 255, 255);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 20px;
+  font-weight: 600;
+  top: 10px;
+}
 .restaurantName {
   height: 100px;
   margin: 0px;
@@ -64,6 +77,20 @@
   color: gray;
 }
 
+.quickFilters {
+  display: flex;
+  margin-bottom: 20px;
+}
+.quickFiltersItem {
+  margin: 0 10px;
+  border: 1px solid gray;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.active {
+  background-color: gray;
+  color: white;
+}
 @keyframes infinite-rotate {
   from {
     transform: rotate(0deg);

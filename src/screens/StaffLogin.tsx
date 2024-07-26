@@ -6,23 +6,31 @@ import { loginSchema } from "../zodSchemas/staffSchemas";
 import { staffAxios } from "../axios/staffAxios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { IApiResponse, IStaff } from "../types/deliveriesType";
+import { useDispatch } from "react-redux";
+import { staffActions } from "../slices/staffSlice";
 export const StaffLogin = () => {
   const {
     watch,
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
   const state = watch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const submit = async (data: FieldValues) => {
-    const apiRes = await staffAxios.post("/auth/login", data, {
-      withCredentials: true,
-    });
-    if (apiRes?.data?.success) {
+    const apiRes: IApiResponse<IStaff> = await staffAxios.post(
+      "/auth/login",
+      data,
+      {
+        withCredentials: true,
+      }
+    );
+    if (apiRes?.data?.success && apiRes.data.result) {
+      dispatch(staffActions.setStaffDetails(apiRes.data.result));
       navigate("/");
     } else {
       toast.error(apiRes?.data?.errorMessage);
