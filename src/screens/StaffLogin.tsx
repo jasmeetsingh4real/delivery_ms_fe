@@ -4,20 +4,23 @@ import styles from "./login.module.css";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../zodSchemas/staffSchemas";
 import { staffAxios } from "../axios/staffAxios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { IApiResponse, IStaff } from "../types/deliveriesType";
 import { useDispatch } from "react-redux";
 import { staffActions } from "../slices/staffSlice";
+import { useEffect } from "react";
 export const StaffLogin = () => {
   const {
     watch,
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
+  const [searchParams, setSearchParams] = useSearchParams();
   const state = watch();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -37,6 +40,34 @@ export const StaffLogin = () => {
     }
   };
 
+  const handleRedirect = async (email: string, password: string) => {
+    const apiRes: IApiResponse<IStaff> = await staffAxios.post(
+      "/auth/login",
+      {
+        email,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    if (apiRes?.data?.success && apiRes.data.result) {
+      dispatch(staffActions.setStaffDetails(apiRes.data.result));
+      navigate("/");
+    } else {
+      toast.error(apiRes?.data?.errorMessage);
+    }
+  };
+
+  useEffect(() => {
+    if (searchParams.get("isRedirected")) {
+      const staffEmail = searchParams.get("staffEmail");
+      const password = searchParams.get("password");
+      if (staffEmail && password) {
+        handleRedirect(staffEmail, password);
+      }
+    }
+  }, [searchParams]);
   return (
     <div className={styles.staffLogin}>
       <h3 className="text-white">

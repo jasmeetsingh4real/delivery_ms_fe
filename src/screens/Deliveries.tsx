@@ -14,11 +14,11 @@ import img from "../assets/shawnanggg-nmpW_WwwVSc-unsplash.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { CustomDateRange } from "../commonUi/CustomDatePicker";
 import { staffActions } from "../slices/staffSlice";
+import { useParams, useSearchParams } from "react-router-dom";
 
 export const Deliveries = () => {
   const [alllDeliveries, setAllDeliveries] = useState<IDelivery[]>([]);
   const [loading, setLoading] = useState(false);
-
   const [deliveriesCount, setDeliveriesCount] = useState<{
     [key in EnumDeliveryStatus]: number;
   }>();
@@ -153,6 +153,7 @@ export const Deliveries = () => {
       getRestaurantInfo();
     }
   }, [staffData]);
+
   return (
     <div className="w-100">
       <div className={styles.restauratImage}>
