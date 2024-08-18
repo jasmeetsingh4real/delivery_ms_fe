@@ -28,7 +28,7 @@ export const Deliveries = () => {
     toDate: Date;
   }>({
     fromDate: moment().startOf("day").toDate(),
-    toDate: moment().endOf("day").toDate(),
+    toDate: moment().endOf("day").add(2, "day").toDate(),
   });
 
   const [deliveryStatusFilter, setDeliveryStatusFilter] = useState<
